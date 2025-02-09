@@ -1,0 +1,10 @@
+{
+    "directories": {
+        "input": "../input",
+        "output": "../output"
+    },
+    "rules": {
+        "max_tokens_answer": 54,
+        "docs_num": 19
+    }
+}
