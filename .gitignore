@@ -1,0 +1,18 @@
+# python settings
+pyproject.toml
+
+# pyenv config
+.python-version
+
+# poetry config
+poetry.lock
+
+# development environment
+.venv
+.DS_Store
+
+# cache
+__pycache__
+
+# sensitive information
+.env

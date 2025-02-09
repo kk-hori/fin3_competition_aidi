@@ -1,0 +1,16 @@
+[type]([scope]): [subject]
+# 
+# 詳細説明(必要に応じ記載)
+#
+# [type]の凡例
+#  - env: 開発環境全体に関すること
+#  - feature: 新機能の開発
+#  - fix: バグ修正
+#  - exam: 調査・実験結果
+#  - change: 既存機能の変更
+# [scope]の凡例
+# - script: .py等のスクリプト単位
+# - module: .py等のmodule単位
+# - function: 関数単位
+# - document: ドキュメント単位
+# - config: 設定ファイル単位
