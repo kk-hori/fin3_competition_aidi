@@ -71,6 +71,7 @@ class AzAIDocumentIntelligence(AzAIServices):
         with open(path_input_file, "rb") as f:
             poller = self.document_intelligence_client.begin_analyze_document(
                 model_id=self.config_aidi["model_id"],
+                body=f,
                 output_content_format=self.config_aidi["output_content_format"],
             )
         result: AnalyzeResult = poller.result()

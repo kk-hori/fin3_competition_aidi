@@ -16,12 +16,11 @@ import mimetypes
 from pathlib import Path
 
 import fitz
+from az_ai_document_intelligence import AzAIDocumentIntelligence
 from azure.ai.documentintelligence.models import AnalyzeResult
 from common.file_utils import str_to_md_file
 from common.load_config import get_input_dir, get_output_dir
 from PIL import Image
-
-from .az_ai_document_intelligence import AzAIDocumentIntelligence
 
 input_dir = get_input_dir()
 output_dir = get_output_dir()
@@ -146,53 +145,54 @@ def main():
     png_dir_output.mkdir(exist_ok=True)
 
     obj_aidi = AzAIDocumentIntelligence()
-    result: AnalyzeResult = obj_aidi.get_analyzed_result()
+    result: AnalyzeResult = obj_aidi.get_analyzed_result(path_file_input)
+    path_output_json = json_dir_output / f"{base_file_name}.json"
 
     all_markdown = ""  # 最終的に出力したいMarkdown形式の文字列
     result_paragraphs = obj_aidi.get_paragraphs(result)
     result_sections = obj_aidi.get_sections(result)
 
-    for sec in result_sections:
+    for i, sec in enumerate(result_sections):
         if sec.startswith("/paragraphs/"):
-            if result_paragraphs[sec]["role"] == "title":
+            if result_paragraphs[i]["role"] == "title":
                 # titleならHeader1を付与
-                all_markdown += "# " + result_paragraphs[sec]["content"] + "\n"
-            elif result_paragraphs[sec]["role"] == "sectionHeading":
+                all_markdown += "# " + result_paragraphs[i]["content"] + "\n"
+            elif result_paragraphs[i]["role"] == "sectionHeading":
                 # sectionHeadingならHeader2を付与
                 all_markdown += "## " + \
-                    result_paragraphs[sec]["content"] + "\n"
+                    result_paragraphs[i]["content"] + "\n"
             else:
-                all_markdown += result_paragraphs[sec]["content"]
+                all_markdown += result_paragraphs[i]["content"]
 
         if sec.startswith("/figures/"):
             idx = int(sec.split("/")[-1])  # figureのIDを取得
             figure = result.figures[idx]
             if "boundingRegions" in figure:
-                for i, br in enumerate(figure["boundingRegions"]):
+                for j, br in enumerate(figure["boundingRegions"]):
                     page = br["pageNumber"]
                     bbox = br["polygon"]
                     bbox = (bbox[0], bbox[1], bbox[4], bbox[5])
                     image = crop_image_from_file(path_file_input, page-1, bbox)
                     path_output_png = png_dir_output / \
-                        f"{base_file_name}_figure_{idx}_{i}.png"
+                        f"{base_file_name}_figure_{idx}_{j}.png"
                     image.save(path_output_png)
                     # 切り出した画像へのリンクをMarkdownに追加
-                    all_markdown += f"![figure_{idx}_{i}]({path_output_png})"
+                    all_markdown += f"![figure_{idx}_{j}]({path_output_png})"
 
         if sec.startswith("/tables/"):
             idx = int(sec.split("/")[-1])  # tableのIDを取得
             table = result.tables[idx]
             if "boundingRegions" in table:
-                for i, br in enumerate(table["boundingRegions"]):
+                for j, br in enumerate(table["boundingRegions"]):
                     page = br["pageNumber"]
                     bbox = br["polygon"]
                     bbox = (bbox[0], bbox[1], bbox[4], bbox[5])
                     image = crop_image_from_file(path_file_input, page-1, bbox)
                     path_output_png = png_dir_output / \
-                        f"{base_file_name}_table_{idx}_{i}.png"
+                        f"{base_file_name}_table_{idx}_{j}.png"
                     image.save(path_output_png)
                     # 切り出した画像へのリンクをMarkdownに追加
-                    all_markdown += f"![table_{idx}_{i}]({path_output_png})"
+                    all_markdown += f"![table_{idx}_{j}]({path_output_png})"
 
         all_markdown += "\n"
     path_output_md = md_dir_output / f"{base_file_name}_content.md"
