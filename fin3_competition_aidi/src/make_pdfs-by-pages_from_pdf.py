@@ -8,8 +8,8 @@ from pathlib import Path
 from common.load_config import get_input_dir, get_output_dir
 from pypdf import PdfReader, PdfWriter
 
-input_dir = Path(get_input_dir())
-output_dir = Path(get_output_dir())
+input_dir = get_input_dir()
+output_dir = get_output_dir()
 
 
 def parse_arguments() -> argparse.Namespace:
