@@ -6,5 +6,9 @@
     "rules": {
         "max_tokens_answer": 54,
         "docs_num": 19
+    },
+    "az_ai_document_intelligence": {
+        "model_id": "prebuilt-layout",
+        "output_content_format": "markdown"
     }
 }
