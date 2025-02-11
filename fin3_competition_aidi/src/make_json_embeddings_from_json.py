@@ -55,6 +55,7 @@ def main():
             "embedding_vector": embedding_vector,
         }
         embedding_results[chunk_id] = item
+        print(f"chunk_id: {chunk_id} is OK!")
 
     dict_to_json(embedding_results, path_output_file)
 
