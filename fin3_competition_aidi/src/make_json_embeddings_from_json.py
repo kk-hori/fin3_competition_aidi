@@ -48,10 +48,12 @@ def main():
     obj_aoai_embedding = AOAIEmbeddingModel()
 
     for chunk_id, chunk_info in chunked_results.items():
-        page_content = chunk_info["kwargs"]["page_content"]
-        embedding_vector = obj_aoai_embedding.get_response(page_content)
+        metadata = chunk_info["metadata"]
+        content = chunk_info["content"]
+        embedding_vector = obj_aoai_embedding.get_response(content)
         item = {
-            "page_content": page_content,
+            "metadata": metadata,
+            "content": content,
             "embedding_vector": embedding_vector,
         }
         embedding_results[chunk_id] = item
