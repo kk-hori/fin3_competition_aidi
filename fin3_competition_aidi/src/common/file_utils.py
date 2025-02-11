@@ -68,3 +68,23 @@ def dict_to_json(
     """
     with open(path_file_json, "w", encoding=encoding) as f:
         json.dump(dict_for_json, f, ensure_ascii=False, indent=4)
+
+
+def json_to_dict(
+        path_file_json: Path,
+        encoding: str = "utf-8",
+) -> dict[Any, Any]:
+    """JSONファイルを読み込む関数
+
+    指定したパスの.jsonをディクショナリに変換する.
+
+    Args:
+        path_file_json: ディクショナリ変換対象の.jsonのパス
+        encoding: 文字エンコード
+
+    Returns:
+        .jsonの内容のディクショナリ
+    """
+    with open(path_file_json, "r", encoding=encoding) as f:
+        dict_from_json = json.load(f)
+    return dict_from_json
