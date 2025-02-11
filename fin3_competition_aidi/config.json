@@ -10,5 +10,11 @@
     "az_ai_document_intelligence": {
         "model_id": "prebuilt-layout",
         "output_content_format": "markdown"
+    },
+    "azure_openai": {
+        "embedding": {
+            "model_name": "text-embedding-3-large",
+            "max_tokens": 8000
+        }
     }
 }
