@@ -96,7 +96,8 @@ class AOAIEmbeddingModel(AOAIModel):
     def __init__(self):
         """イニシャライザ"""
         super().__init__()
-        self.dep_id_embedding_comp = os.getenv["AOAI_DEPLOYMENT_ID_FOR_EMBEDDING"]
+        self.dep_id_embedding_comp = os.getenv(
+            "AOAI_DEPLOYMENT_ID_FOR_EMBEDDING")
 
     def get_response(
             self,
