@@ -24,6 +24,7 @@ cryptography==44.0.0
 debugpy==1.8.12
 decorator==5.1.1
 defusedxml==0.7.1
+distro==1.9.0
 executing==2.2.0
 fastjsonschema==2.21.1
 fqdn==1.5.1
@@ -39,6 +40,7 @@ isodate==0.7.2
 isoduration==20.11.0
 jedi==0.19.2
 Jinja2==3.1.5
+jiter==0.8.2
 json5==0.10.0
 jsonpatch==1.33
 jsonpointer==3.0.0
@@ -73,6 +75,7 @@ nest-asyncio==1.6.0
 notebook==7.3.2
 notebook_shim==0.2.4
 numpy==1.26.4
+openai==1.61.1
 orjson==3.10.15
 overrides==7.7.0
 packaging==24.2
@@ -116,6 +119,7 @@ tenacity==9.0.0
 terminado==0.18.1
 tinycss2==1.4.0
 tornado==6.4.2
+tqdm==4.67.1
 traitlets==5.14.3
 types-python-dateutil==2.9.0.20241206
 typing_extensions==4.12.2
