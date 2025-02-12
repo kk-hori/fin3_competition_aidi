@@ -25,7 +25,7 @@ class OpenAIModel:
         )
 
 
-class AOAIChatModel(OpenAIModel):
+class OpenAIChatModel(OpenAIModel):
     """OpenAI の Chat モデルの機能をまとめたクラス
 
     必要なパラメータを設定し, AOAIのAPIを実行する.
