@@ -16,5 +16,15 @@
             "model_name": "text-embedding-3-large",
             "max_tokens": 8000
         }
+    },
+    "elasticsearch": {
+        "url": "http://localhost:9200",
+        "data": {
+            "path": "../data/elasticsearch/data",
+            "index": {
+                "name": "documents",
+                "dims_embedding": 3072
+            }
+        }
     }
 }

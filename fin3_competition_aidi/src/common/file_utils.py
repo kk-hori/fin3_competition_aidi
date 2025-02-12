@@ -2,6 +2,7 @@
 
 各スクリプトにおけるファイル操作時は，本モジュールに定義された機能を呼び出す.
 """
+import csv
 import json
 from pathlib import Path
 
@@ -88,3 +89,48 @@ def json_to_dict(
     with open(path_file_json, "r", encoding=encoding) as f:
         dict_from_json = json.load(f)
     return dict_from_json
+
+
+def csv_to_list(
+        path_file_csv: Path,
+        encoding: str = "utf-8",
+) -> list[list[str]]:
+    """CSVファイルを読み込む関数
+
+    ヘッダーが存在することを想定しており，読み込む時もスキップしない.
+
+    Args:
+        path_file_csv: 読み込み対象.csvのパス
+        encoding: 文字エンコード
+
+    Returns:
+        .csvの内容のリスト
+    """
+    list_from_csv = []
+    with open(path_file_csv, "r", encoding=encoding) as f:
+        csv_reader = csv.reader(f)
+        for row in csv_reader:
+            list_from_csv.append(row)
+    return list_from_csv
+
+
+def list_to_csv(
+        list_for_csv: list[list[str]],
+        path_file_csv: Path,
+        encoding: str = "utf-8",
+) -> None:
+    """リスト型からCSVファイルに書き出す関数
+
+    指定したパスに.csvファイルを作成する.
+
+    Args:
+        list_for_csv: .csv書き出し対象のリスト
+        path_file_csv: 作成する.csvのパス
+        encoding: 文字エンコード
+
+    Returns:
+        None
+    """
+    with open(path_file_csv, "w", encoding=encoding, newline="") as f:
+        writer = csv.writer(f)
+        writer.writerows(list_for_csv)
