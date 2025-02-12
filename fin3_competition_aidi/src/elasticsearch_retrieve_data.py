@@ -54,7 +54,7 @@ class ElasticsearchRetrivation:
         Returns:
             検索結果上位のデータ
         """
-        rate_keyword_search = 1.0 - rate_keyword_search  # キーワード検索の割合
+        rate_keyword_search = 1.0 - rate_vector_search  # キーワード検索の割合
 
         # ハイブリッド検索を実行
         response = self.es.search(
