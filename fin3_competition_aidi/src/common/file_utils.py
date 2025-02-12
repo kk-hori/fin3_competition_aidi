@@ -93,7 +93,7 @@ def json_to_dict(
 
 def csv_to_list(
         path_file_csv: Path,
-        encoding: str,
+        encoding: str = "utf-8",
 ) -> list[list[str]]:
     """CSVファイルを読み込む関数
 
@@ -117,7 +117,7 @@ def csv_to_list(
 def list_to_csv(
         list_for_csv: list[list[str]],
         path_file_csv: Path,
-        encoding: str,
+        encoding: str = "utf-8",
 ) -> None:
     """リスト型からCSVファイルに書き出す関数
 
