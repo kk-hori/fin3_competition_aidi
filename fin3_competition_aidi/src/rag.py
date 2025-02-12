@@ -2,7 +2,7 @@
 
 各スクリプトで RAG の処理が必要なときは本モジュールから呼び出す.
 """
-from az_openai import AOAIChatModel
+from openai_model import OpenAIChatModel
 
 
 def generate_answer(
@@ -34,7 +34,7 @@ def generate_answer(
         " - 数量で回答するべき質問の回答には単位をつけること\n"
         " - 質問に対して<information>タグにある情報で，質問に答えるための情報がない場合は「分かりません」と答えること"
     )
-    obj_chat_model = AOAIChatModel(system_content)
+    obj_chat_model = OpenAIChatModel(system_content)
     answer = obj_chat_model.get_response_only_text(user_content)
 
     return answer
@@ -72,11 +72,16 @@ def process_answer(
         "# 留意事項\n"
         " - 句点(。)を含まないようにすること\n"
         " - 複数の回答がある場合は，読点(、)で区切ること\n"
-        " - 質問文の問い方合わせた回答のみが求められていること\n"
+        " - 質問文の問われ方に適した回答となっていること\n"
+        "  - 例1: 理由について質問されていなければ，理由はいらず結論だけで良い\n"
+        "  - 例2: 数量が問われている場合は単位とともに数量だけ回答する\n"
+        "  - 例3: 単語が問われている場合は単語のみ答える\n"
+        "  - 例4: 数量が問われていない場合は数量の情報を含めない\n"
+        "  - 例5: 比較結果が問われいる場合は比較結果のみ答える\n"
         " - 文法の誤りを残さないこと\n"
         " - 「分かりません」「不明」という意味に近い回答の場合は「分かりません」と回答すること"
     )
-    obj_chat_model = AOAIChatModel(system_content)
+    obj_chat_model = OpenAIChatModel(system_content)
     processed_answer = obj_chat_model.get_response_only_text(
         user_content=user_content,
         max_tokens=max_tokens,
