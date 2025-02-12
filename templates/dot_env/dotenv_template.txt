@@ -1,0 +1,23 @@
+# .envファイルのテンプレート
+# 各値を設定し，ファイル".env"としてプロジェクトのルートフォルダ直下に格納する
+
+#----------------------------
+# Azure OpenAI API
+#----------------------------
+AOAI_API_KEY = "xxxxxx" # API key
+AOAI_ENDPOINT = "https://xxxxxx.azure-api.net/model/" # endpoint
+AOAI_API_VERSION = "2024-10-21"
+AOAI_DEPLOYMENT_ID_FOR_CHAT_COMPLETION = "4omini"
+AOAI_DEPLOYMENT_ID_FOR_EMBEDDING = "embedding"
+
+#----------------------------
+# OpenAI API
+#----------------------------
+OPENAI_API_KEY = "xxxxxx" # API key
+OPENAI_CHAT_MODEL = "gpt-4o"
+
+#----------------------------
+# Azure AI services
+#----------------------------
+AZURE_AI_SERVICES_API_KEY = "xxxxxx" # API key 
+AZURE_AI_SERVICES_ENDPOINT = "https://xxxxxx.openai.azure.com/" # endpoint
