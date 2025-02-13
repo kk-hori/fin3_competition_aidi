@@ -3,7 +3,7 @@
 質問データを読み込み,RAGによって回答を生成する.
 スクリプト実行前に,回答生成に使用するファイルをinputディレクトリに決められたファイル名で格納しておく.
 """
-from az_openai import AOAIEmbeddingModel
+from az_openai_model import AOAIEmbeddingModel
 from common.calc_utils import get_similar_vectors
 from common.file_utils import csv_to_list, json_to_dict, list_to_csv
 from common.load_config import get_input_dir, get_output_dir, load_config

@@ -5,7 +5,7 @@
 """
 from pathlib import Path
 
-from az_openai import AOAIEmbeddingModel
+from az_openai_model import AOAIEmbeddingModel
 from common.file_utils import dict_to_json, file_to_str
 from common.load_config import get_input_dir, get_output_dir, load_config
 from openai_model import OpenAIChatModel

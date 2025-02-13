@@ -4,7 +4,7 @@
 """
 import argparse
 
-from az_openai import AOAIEmbeddingModel
+from az_openai_model import AOAIEmbeddingModel
 from common.file_utils import dict_to_json, json_to_dict
 from common.load_config import get_input_dir, get_output_dir
 
