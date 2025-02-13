@@ -1,7 +1,9 @@
 """コンペの提出データを作成するスクリプト
 
 質問データを読み込み,RAGによって回答を生成する.
-スクリプト実行前に,回答生成に使用するファイルをinputディレクトリに決められたファイル名で格納しておく.
+スクリプト実行前に,回答生成に使用する以下のファイルをinputディレクトリに決められたファイル名で格納しておく.
+ - query.csv: 質問データ
+ - company_embedding.json: 各ドキュメントの企業名および企業名の埋め込みベクトルデータ
 """
 from az_openai_model import AOAIEmbeddingModel
 from common.calc_utils import get_similar_vectors
@@ -29,7 +31,7 @@ def extract_company_name(
 
     Returns:
         企業名
-        企業名が抽出できない場合はハイフン(-)を想定
+        抽出できない場合はハイフン(-)を想定
     """
     system_content = (
         "あなたは優秀な企業名抽出アシスタントです．"
@@ -107,16 +109,18 @@ def main():
         query_vector = obj_aoai_embedding.get_response(query)
         query_company = extract_company_name(query)
 
+        # クエリから企業名を抽出できた場合はElasticsearchの検索対象を絞る
         if query_company != "-":
             query_company_vector = obj_aoai_embedding.get_response(
                 query_company)
+            # 各ドキュメントから抽出された企業名との類似度で最大の類似度をとる企業に対応するドキュメントIDを取得
             doc_id_for_filter = get_similar_vectors(
                 query_company_vector, dict_for_similality, top=1)[0][0]
-
             query_non_company = extract_company_name_from_query(
                 query, query_company)
             query_vector_non_company = obj_aoai_embedding.get_response(
                 query_non_company)
+            # ドキュメントIDでフィルタリングした対象に対し検索を実行
             es_search_results = obj_es_retrievation.retrieve_hybrid_with_filter(
                 query=query_non_company,
                 query_vector=query_vector_non_company,
@@ -126,6 +130,7 @@ def main():
                 num_candidates=100,
             )
 
+        # クエリから企業名を抽出できなかった場合はElasticsearchの検索対象を全件とする
         else:
             es_search_results = obj_es_retrievation.retrieve_hybrid(
                 query=query,
@@ -135,6 +140,7 @@ def main():
                 num_candidates=100,
             )
 
+        # 検索上位のコンテンツから提出ファイルに必要な各質問に対する回答を生成する
         infomation_for_answer = ""
         for i, result in enumerate(es_search_results):
             content = result["content"]
@@ -148,6 +154,7 @@ def main():
         print(f"{query_no}: {processed_answer}")
         answers.append([query_no, processed_answer])
 
+    # 回答データを保存する
     list_to_csv(answers, path_answer_file)
 
 
