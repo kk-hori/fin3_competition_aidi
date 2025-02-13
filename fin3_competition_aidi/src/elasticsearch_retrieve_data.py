@@ -17,7 +17,7 @@ DIMS_EMBEDDING = config["elasticsearch"]["data"]["index"]["dims_embedding"]
 class ElasticsearchRetrivation:
     """Elasticsearchの検索処理をまとめたクラス
 
-    登録済のデータに対し各種検索処理のメソッドが定義されている.
+    登録済のデータに対し検索処理のメソッドが定義されている.
 
     Attributes:
         es: Elasticsearch クライアント
@@ -39,8 +39,9 @@ class ElasticsearchRetrivation:
     ) -> list[dict[str, Any]]:
         """ハイブリッド検索を実行するメソッド
 
-        全てのデータを検索対象とする.
-        類似度アルゴリズムは knn 検索である.
+        類似度検索およびキーワード検索を指定した比率で実行する.
+        検索対象は全てのデータである.
+        類似度アルゴリズムは knn である.
 
         Args:
             query: クエリ(キーワード検索対象)
@@ -126,8 +127,9 @@ class ElasticsearchRetrivation:
     ) -> list[dict[str, Any]]:
         """ハイブリッド検索を実行するメソッド
 
-        全てのデータを検索対象とする.
-        類似度アルゴリズムは knn 検索である.
+        類似度検索およびキーワード検索を指定した比率で実行する.
+        検索対象はドキュメントIDによりフィルタリングされたデータである.
+        類似度アルゴリズムは knn である.
 
         Args:
             query: クエリ(キーワード検索対象)

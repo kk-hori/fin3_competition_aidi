@@ -1,6 +1,6 @@
-"""Elasticsearch に格納したデータを削除するスクリプト
+"""Elasticsearch に登録したデータを削除するスクリプト
 
-同じインデックス名で異なるデータを格納する場合，格納前にこのスクリプトを実行する.
+同じインデックス名で異なるデータが登録済かつ新たに登録し直す場合，登録前に本スクリプトを実行する.
 """
 from common.load_config import load_config
 from elasticsearch import Elasticsearch
@@ -13,7 +13,6 @@ INDEX_NAME_DOC = config["elasticsearch"]["data"]["index"]["name"]
 
 
 def main():
-    """本スクリプトのメイン処理が定義された関数"""
     # Elasticsearch に接続
     es = Elasticsearch(URL)
 

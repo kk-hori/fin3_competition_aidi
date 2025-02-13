@@ -1,7 +1,8 @@
-"""データを Elasticsearch に格納するスクリプト
+"""データを Elasticsearch に登録するスクリプト
 
 別スクリプトで作成したチャンクや埋め込みベクトルの結果を Elasticsearch のデータに登録する.
-本スクリプト実行前に,登録に使用するデータをinputディレクトリに決められたファイル名で格納しておく.
+本スクリプト実行前に,登録に使用する以下のデータをinputディレクトリに決められたファイル名で格納しておく.
+ - {1..19}_embedding.json: 各ドキュメントのチャンク,各チャンクの埋め込みベクトル,およびメタデータ
 """
 from common.file_utils import json_to_dict
 from common.load_config import get_input_dir, load_config
