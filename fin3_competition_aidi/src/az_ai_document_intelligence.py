@@ -4,7 +4,6 @@
 
 参考:
 >https://qiita.com/nohanaga/items/1263f4a6bc909b6524c8
->https://nttdocomo-developers.jp/entry/2024/12/24/090000_2
 """
 import os
 from pathlib import Path
@@ -42,6 +41,7 @@ class AzAIDocumentIntelligence(AzAIServices):
 
     Attributes:
         document_intelligence_client: AIDIクライアント
+        config_aidi: AIDIの設定値
     """
 
     def __init__(self):
@@ -105,7 +105,7 @@ class AzAIDocumentIntelligence(AzAIServices):
 
         Args:
             result: AIDIによるドキュメントの構造解析結果
-            layer_flag: 階層構造の情報を維持した結果とするか否かのフラグ
+            layer_flag: 階層構造の情報を維持した戻り値とするか否かのフラグ
 
         Returns:
             セクションと各セクションの情報
