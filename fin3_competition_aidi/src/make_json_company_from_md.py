@@ -1,11 +1,10 @@
 """Markdownファイルのテキストから企業情報をまとめたJSONファイルを作成するスクリプト
 
 企業名および企業名の埋め込みベクトルを取得する.
-スクリプト実行前に,JSONファイル作成に使用するファイルをinputディレクトリに決められたファイル名で格納しておく.
+スクリプト実行前に,JSONファイル作成に使用する以下のファイルをinputディレクトリに決められたファイル名で格納しておく.
+ - {1..19}.md: 各ドキュメント{1..19}.pdfをMarkdown化したファイル
 """
-from pathlib import Path
-
-from az_openai import AOAIEmbeddingModel
+from az_openai_model import AOAIEmbeddingModel
 from common.file_utils import dict_to_json, file_to_str
 from common.load_config import get_input_dir, get_output_dir, load_config
 from openai_model import OpenAIChatModel

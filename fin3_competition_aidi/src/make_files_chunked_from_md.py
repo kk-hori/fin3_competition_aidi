@@ -1,6 +1,6 @@
-"""Markdownファイルのテキストをチャンク分割したTXTファイルを作成するスクリプト
+"""Markdownファイルのテキストをチャンク分割したチャンク結果ファイルを作成するスクリプト
 
-Markdonw構造に最適な分割手法として LangChain の機能を使用する.
+Markdonw構造に最適な分割手法は LangChain 経由で使用する.
 実行結果ファイルは以下の通り複数となる:
  - チャンク結果のメタデータおよびコンテンツ(.json)
  - チャンク結果のコンテンツ(.md)
@@ -105,6 +105,7 @@ def main():
         metadata = doc.metadata
         content = doc.page_content
         content_tokens = count_tokens(content, model_name)
+        # チャンクのトークン数が上限を下回る場合はそのチャンクをそのままチャンク結果とする
         if content_tokens <= max_tokens:
             id = i + additonal_id
             path_output_md = output_dir / f"{base_file_name}_chunked_{id}.md"
@@ -115,6 +116,8 @@ def main():
             }
             dict_chunk_result[id] = item
             chunk_total += 1
+        # チャンクのトークン数が上限を上回る場合は追加で再帰分割した結果をチャンク結果とする
+        # 同じチャンクIDが後続で使用されないよう値の管理に注意する必要がある
         else:
             sub_contents = split_recursive_character(content)
             sub_length = len(sub_contents)
