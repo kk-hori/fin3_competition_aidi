@@ -87,3 +87,6 @@ PDFファイルをインプットとして，`make_results_aidi_from_pdf.py` を
 ├── templates : テンプレートファイル格納ディレクトリ
 └── tests : (未使用)
 ```
+
+## 反省や展望
+[Thouths.md](./fin3_competition_aidi/docs/Thouths.md) に記載．
