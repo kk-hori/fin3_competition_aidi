@@ -69,3 +69,21 @@ PDFファイルをインプットとして，`make_results_aidi_from_pdf.py` を
 
 ### 6. 提出用データの作成
 `make_csv_submission.py` を実行する．
+
+## ディレクトリ構成
+```
+.
+├── README.md
+├── .env（ユーザ自身で作成）
+├── requirements.txt
+├── config.json : プログラム全体の設定ファイル
+├── fin3_competition_aidi : メインディレクトリ
+│   ├── data : データ格納ディレクトリ
+│   ├── docs : ドキュメント格納ディレクトリ
+│   ├── input : スクリプト実行時のインプットファイル格納ディレクトリ
+│   ├── output : スクリプト実行時のアウトプットファイル出力先ディレクトリ
+│   ├── notebook : notebook形式(.ipynb)格納ディレクトリ
+│   └── src : スクリプト(.py)格納ディレクトリ
+├── templates : テンプレートファイル格納ディレクトリ
+└── tests : (未使用)
+```
