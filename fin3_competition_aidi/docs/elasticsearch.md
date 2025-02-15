@@ -100,3 +100,24 @@ JSONレスポンスが返ってくれば無事に起動できている．
   }
 }
 ```
+
+### 4. プラグイン（kuromoji-analyzer）のインストール
+日本語のキーワード検索に対応させるため `kuromoji` プラグインを使用する．  
+以下コマンドにより `analysis-kuromoji` をインストールする．
+```powershell
+# Windows
+cd <expanded-direcroty>
+.\bin\elasticsearch-plugin install analysis-kuromoji
+```
+```bash
+# Linux/MacOS
+cd <expanded-direcroty>
+./bin/elasticsearch-plugin install analysis-kuromoji
+```
+インストールしたプラグインを有効にするため，Elasticsearch を再起動する．
+
+再起動後，以下コマンドでプラグインが正しくインストールできたか確認する．
+```
+elasticsearch-plugin list
+```
+正しくインストールされていれば `analysis-kuromoji` が表示される．
