@@ -8,9 +8,10 @@
 #  - fix: バグ修正
 #  - exam: 調査・実験結果
 #  - change: 既存機能の変更
+#  - refactor: リファクタリング
 # [scope]の凡例
 # - script: .py等のスクリプト単位
-# - module: .py等のmodule単位
+# - module: module単位
 # - function: 関数単位
 # - document: ドキュメント単位
 # - config: 設定ファイル単位
