@@ -45,3 +45,27 @@ git config --local commit ./template templates/git/commit_template.txt
 以下にテンプレートを用意してある．  
 [./templates/dot_env_dotenv_temlate.txt](./templates/dot_env/dotenv_template.txt)
 
+### 検索対象ドキュメントデータの取得
+PDFファイルを取得する．保護がかかっている場合は解除しておく．
+
+## 提出ファイル作成までのスクリプト実行手順
+
+### 1. PDFのテキスト化
+PDFファイルをインプットとして，`make_results_aidi_from_pdf.py` を実行する．  
+
+### 2. チャンク分割
+1.で取得できるMarkdownファイルをインプットとして `make_files_chunked_from_md.py` を実行する．
+
+### 3. チャンクの埋め込みベクトル化
+2.で取得できるJSONファイルをインプットとして `make_json_embeddings_from_json.py` を実行する．
+
+### 4. ベクトルデータベース作成
+3.で取得したJSONデータをインプットとして `elasticsearch_store_data.py` を実行する．  
+一度上記のスクリプトを実行すると，Elasticsearchに特定のインデックスで登録される．  
+登録したデータを削除する場合は `elasticsearch_delete_data.py` を実行する．
+
+### 5. 補足データ作成
+1.で取得できるMarkdownファイルをインプットとして `make_json_company_from_md.py`　を実行する．
+
+### 6. 提出用データの作成
+`make_csv_submission.py` を実行する．
