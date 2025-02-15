@@ -31,7 +31,7 @@ git config --local commit ./template templates/git/commit_template.txt
 ## 事前準備
 各スクリプト実行前に，以下を準備する．
 
-### Azure AI Document intelligence　の実行環境構築と接続情報の取得
+### Azure AI Document intelligence の実行環境構築と接続情報の取得
 [Azure_AI_Document_intelligence.md](./fin3_competition_aidi/docs/Azure_AI_Document_intelligence.md) の前半を参照．
 
 ### Elasticsearch の実行環境構築
