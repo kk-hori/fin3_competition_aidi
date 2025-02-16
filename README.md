@@ -35,7 +35,7 @@ git config --local commit ./template templates/git/commit_template.txt
 [Azure_AI_Document_intelligence.md](./fin3_competition_aidi/docs/Azure_AI_Document_intelligence.md) の前半を参照．
 
 ### Elasticsearch の実行環境構築
-[Erasticsearch.md](./fin3_competition_aidi/docs/Elasticsearch.md) の前半を参照．
+[Elasticsearch.md](./fin3_competition_aidi/docs/Elasticsearch.md) の前半を参照．
 
 ### OpenAI or Azure OpenAI モデルの接続情報の取得
 公式リファレンスを参照し，APIキーを取得する．
